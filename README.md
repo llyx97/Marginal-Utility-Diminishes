@@ -18,7 +18,7 @@ boto3 <br />
 ## Fine-tuning BERT-base
 To fine-tune the pre-trained BERT model on a downstream task ${TASK_NAME}$, run:
 ```
-python bert_ft.py \
+CUDA_VISIBLE_DEVICES=0 python bert_ft.py \
   --model_type bert \
   --model_name_or_path bert-base-uncased \
   --output_dir models/bert_ft/${TASK_NAME}$ \
@@ -59,12 +59,12 @@ python bert_ft.py \
 Step2: Prune the model based on the importance scores:
 ```
 python3 pruning.py \
-        --model_path models/bert_ft/${TASK_NAME}$ \
-        --output_dir models/prun_bert/${TASK_NAME}$ \
-        --task ${TASK_NAME}$ \
-        --keep_heads ${NUM_OF_ATTN_HEADS_TO_KEEP}$ \
-        --num_layers ${NUM_OF_LAYERS_TO_KEEP}$ \
-        --ffn_hidden_dim ${HIDDEN_DIM_OF_FFN}$ \
-        --emb_hidden_dim ${MATRIX_RANK_OF_EMB_FACTORIZATION}$
+   --model_path models/bert_ft/${TASK_NAME}$ \
+   --output_dir models/prun_bert/${TASK_NAME}$ \
+   --task ${TASK_NAME}$ \
+   --keep_heads ${NUM_OF_ATTN_HEADS_TO_KEEP}$ \
+   --num_layers ${NUM_OF_LAYERS_TO_KEEP}$ \
+   --ffn_hidden_dim ${HIDDEN_DIM_OF_FFN}$ \
+   --emb_hidden_dim ${MATRIX_RANK_OF_EMB_FACTORIZATION}$
 ```
 The architecture of the ROSITA model is `keep_heads=2`, `keep_layers=6`, `ffn_hidden_dim=768` and `emb_hidden_dim=128`.
