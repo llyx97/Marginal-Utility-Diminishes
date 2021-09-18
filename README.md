@@ -37,6 +37,7 @@ python bert_ft.py \
 
 ## Initialize Student Models
 
+### TinyBERT 
 The pre-trained TinyBERT can be downloaded from [this url](https://github.com/huawei-noah/Pretrained-Language-Model/tree/master/TinyBERT).
 
 The construction of ROSITA consist of two steps:
