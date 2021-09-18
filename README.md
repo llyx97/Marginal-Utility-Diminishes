@@ -1,4 +1,4 @@
-# Marginal Utility Diminishes: Exploring the Minimum Knowledge for BERT Knowledge Distillation
+# Marginal Utility Diminishes in BERT KD
 
 This repository contains implementation of the [paper](https://arxiv.org/abs/2106.05691) "Marginal Utility Diminishes: Exploring the Minimum Knowledge for BERT Knowledge Distillation" in ACL 2021.
 
