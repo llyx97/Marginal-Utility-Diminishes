@@ -46,7 +46,7 @@ Step1: Compute the importance of model weights using a metric based on first-ord
 python bert_ft.py \
   --model_type bert \
   --model_name_or_path models/bert_ft/${TASK_NAME}$ \
-  --output_dir ../models/bert_ft/${TASK_NAME}$ \
+  --output_dir ../models/bert_ft/${TASK_NAME}$/importance_score \
   --data_dir data/${TASK_NAME}$ \
   --task_name ${TASK_NAME}$ \
   --max_seq_length 128 \
@@ -55,3 +55,16 @@ python bert_ft.py \
   --save_steps 0 \
   --compute_taylor True
 ```
+
+Step2: Prune the model based on the importance scores:
+```
+python3 pruning.py \
+        -model_path models/bert_ft/${TASK_NAME}$ \
+        -output_dir models/prun_bert/${TASK_NAME}$ \
+        -task ${TASK_NAME}$ \
+        -keep_heads ${NUM_OF_ATTN_HEADS_TO_KEEP}$ \
+        -num_layers ${NUM_OF_LAYERS_TO_KEEP}$ \
+        -ffn_hidden_dim ${HIDDEN_DIM_OF_FFN}$ \
+        -emb_hidden_dim ${MATRIX_RANK_OF_EMB_FACTORIZATION}$
+```
+The architecture of the ROSITA model is `keep_heads=2`, `keep_layers=6`, `ffn_hidden_dim=768` and `emb_hidden_dim=128`.
