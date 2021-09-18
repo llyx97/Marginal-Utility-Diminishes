@@ -58,7 +58,7 @@ python bert_ft.py \
 
 Step2: Prune the model based on the importance scores:
 ```
-python3 pruning.py \
+python pruning.py \
    --model_path models/bert_ft/${TASK_NAME}$ \
    --output_dir models/prun_bert/${TASK_NAME}$ \
    --task ${TASK_NAME}$ \
