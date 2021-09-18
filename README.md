@@ -14,3 +14,23 @@ Python3 <br />
 torch>1.4.0 <br />
 tqdm <br />
 boto3 <br />
+
+## Fine-tuning BERT-base
+To fine-tune the pre-trained BERT model on a downstream task ${TASK_NAME}$, run:
+```
+python bert_ft.py \
+  --model_type bert \
+  --model_name_or_path bert-base-uncased \
+  --task_name ${TASK_NAME}$ \
+  --do_train \
+  --do_eval \
+  --evaluate_during_training \
+  --data_dir data/${TASK_NAME}$ \
+  --output_dir models/bert_ft/${TASK_NAME}$ \
+  --max_seq_length 128 \
+  --per_gpu_train_batch_size 32 \
+  --learning_rate 2e-5 \
+  --num_train_epochs 5.0 \
+  --logging_steps 50 \
+  --save_steps 0 
+```
