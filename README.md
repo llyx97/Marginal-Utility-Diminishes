@@ -40,8 +40,7 @@ python bert_ft.py \
 ### TinyBERT 
 The pre-trained TinyBERT can be downloaded from [this url](https://github.com/huawei-noah/Pretrained-Language-Model/tree/master/TinyBERT).
 
-The construction of ROSITA consist of two steps:
-
+### ROSITA 
 Step1: Compute the importance of model weights using a metric based on first-order taylor expansion. This can be achieved by running:
 ```
 python bert_ft.py \
