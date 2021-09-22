@@ -15,7 +15,7 @@ torch>1.4.0 <br />
 tqdm <br />
 boto3 <br />
 
-## Fine-tuning BERT Teacher
+## Fine-tune BERT Teacher
 To fine-tune the pre-trained BERT model on a downstream task ${TASK_NAME}$, run:
 ```
 CUDA_VISIBLE_DEVICES=0 python bert_ft.py \
