@@ -69,10 +69,29 @@ python pruning.py \
 ```
 The architecture of the ROSITA model is `keep_heads=2`, `keep_layers=6`, `ffn_hidden_dim=768` and `emb_hidden_dim=128`.
 
+## Knowledge Distillation with Teacher Predictions (Soft-labels)
+To conduct prediction distillation, run
+```
+python main.py \
+  --teacher_model models/bert_ft/$TASK \
+  --student_model models/prun_bert/$TASK \
+  --data_dir data/$TASK \
+  --task_name $TASK \
+  --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL}$ \
+  --max_seq_length 128 \
+  --train_batch_size 32 \
+  --num_train_epochs 30 \
+  --learning_rate 2e-5 \
+  --eval_step 50 \
+  --do_lower_case \
+  --pred_distill \
+  --is_rosita
+```
+The above example is for ROSITA. To conduct distillation for TinyBERT, fill the argument `--student_model` with the path of the downloaded pre-trained TinyBERT, and delete the argument `--is_rosita`. The training hyper-parameters can be found in the appendix of the paper. Notably, when the student is trianed only with prediction (w/o HSK distillation), we set the number of training epoch to the same as HSK distillation.
+
 ## Knowledge Distillation with Single-dimension HSK Compression
 
 ### Depth Compression
-
 To conduct hidden state konwledge (HSK) distillation with HSK compressed from the depth dimension, run:
 ```
 python main.py \
@@ -91,4 +110,3 @@ python main.py \
   --repr_distill \
   --is_rosita
 ```
-The above example is for ROSITA. To conduct distillation for TinyBERT, fill the argument `--student_model` with the path of the downloaded pre-trained TinyBERT, and delete the argument `--is_rosita`.
