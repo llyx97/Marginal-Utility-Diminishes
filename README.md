@@ -89,5 +89,6 @@ python main.py \
   --layer_scheme ${DEPTH_COMPRESSION_SCHEME}$ \
   --do_lower_case \
   --repr_distill \
-  --is_rosita \
+  --is_rosita
 ```
+The above example is for ROSITA. To conduct distillation for TinyBERT, fill the argument `--student_model` with the path of the downloaded pre-trained TinyBERT, and delete the argument `--is_rosita`.
