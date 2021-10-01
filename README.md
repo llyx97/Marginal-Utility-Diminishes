@@ -21,9 +21,9 @@ To fine-tune the pre-trained BERT model on a downstream task ${TASK_NAME}$, run:
 CUDA_VISIBLE_DEVICES=0 python bert_ft.py \
   --model_type bert \
   --model_name_or_path bert-base-uncased \
-  --output_dir models/bert_ft/${TASK_NAME}$ \
-  --data_dir data/${TASK_NAME}$ \
-  --task_name ${TASK_NAME}$ \
+  --output_dir models/bert_ft/$TASK \
+  --data_dir data/$TASK \
+  --task_name $TASK \
   --do_train \
   --do_eval \
   --evaluate_during_training \
@@ -45,10 +45,10 @@ Step1: Compute the importance of model weights using a metric based on first-ord
 ```
 python bert_ft.py \
   --model_type bert \
-  --model_name_or_path models/bert_ft/${TASK_NAME}$ \
-  --output_dir models/bert_ft/${TASK_NAME}$/importance_score \
-  --data_dir data/${TASK_NAME}$ \
-  --task_name ${TASK_NAME}$ \
+  --model_name_or_path models/bert_ft/$TASK \
+  --output_dir models/bert_ft/$TASK/importance_score \
+  --data_dir data/$TASK \
+  --task_name $TASK \
   --max_seq_length 128 \
   --per_gpu_train_batch_size 32 \
   --num_train_epochs 1.0 \
@@ -59,9 +59,9 @@ python bert_ft.py \
 Step2: Prune the model based on the importance scores:
 ```
 python pruning.py \
-   --model_path models/bert_ft/${TASK_NAME}$ \
-   --output_dir models/prun_bert/${TASK_NAME}$ \
-   --task ${TASK_NAME}$ \
+   --model_path models/bert_ft/$TASK \
+   --output_dir models/prun_bert/$TASK \
+   --task $TASK \
    --keep_heads ${NUM_OF_ATTN_HEADS_TO_KEEP}$ \
    --num_layers ${NUM_OF_LAYERS_TO_KEEP}$ \
    --ffn_hidden_dim ${HIDDEN_DIM_OF_FFN}$ \
@@ -72,3 +72,22 @@ The architecture of the ROSITA model is `keep_heads=2`, `keep_layers=6`, `ffn_hi
 ## Knowledge Distillation with Single-dimension HSK Compression
 
 ### Depth Compression
+
+To conduct hidden state konwledge (HSK) distillation with HSK compressed from the depth dimension, run:
+```
+python main.py \
+  --teacher_model models/bert_ft/$TASK \
+  --student_model models/prun_bert/$TASK \
+  --data_dir data/$TASK \
+  --task_name $TASK \
+  --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_HSK_DISTILLATION}$ \
+  --max_seq_length 128 \
+  --train_batch_size 32 \
+  --learning_rate 5e-5 \
+  --eval_step 200 \
+  --keep_layers ${THE_NUM_OF_LAYERS_TO_KEEP_FOR_HSK}$ \
+  --layer_scheme ${DEPTH_COMPRESSION_SCHEME}$ \
+  --do_lower_case \
+  --repr_distill \
+  --is_rosita \
+```
