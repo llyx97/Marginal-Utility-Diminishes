@@ -110,4 +110,24 @@ python main.py \
   --repr_distill \
   --is_rosita
 ```
-`keep_layers` can be choosen from 1\~7 (including the embedding layer) for ROSITA and 1\~5 for TinyBERT. `--layer_scheme` can be choosen from "t_top8", "t_top10" and "t_top12".
+`--keep_layers` can be choosen from 1\~7 (including the embedding layer) for ROSITA and 1\~5 for TinyBERT. `--layer_scheme` can be choosen from "t_top8", "t_top10" and "t_top12".
+
+### Length Compression
+To conduct HSK distillation with HSK compressed from the length dimension, run:
+```
+python main.py \
+  --teacher_model models/bert_ft/$TASK \
+  --student_model models/prun_bert/$TASK \
+  --data_dir data/$TASK \
+  --task_name $TASK \
+  --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_HSK_DISTILLATION}$ \
+  --train_batch_size 32 \
+  --learning_rate 5e-5 \
+  --eval_step 200 \
+  --keep_tokens ${THE_NUM_OF_TOKENS_TO_KEEP_FOR_HSK}$  \
+  --layer_scheme t_top10 \
+  --token_scheme ${DEPTH_COMPRESSION_SCHEME}$ \
+  --do_lower_case \
+  --repr_distill \
+  --is_rosita 
+```
