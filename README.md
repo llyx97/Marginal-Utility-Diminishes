@@ -110,3 +110,4 @@ python main.py \
   --repr_distill \
   --is_rosita
 ```
+The number of kept layers can be choosen from 1~7 (including the embedding layer) for ROSITA and 1~5 for TinyBERT. `--layer_scheme` can be choosen from "t_top8", "t_top10" and "t_top12".
