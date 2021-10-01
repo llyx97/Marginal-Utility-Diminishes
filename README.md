@@ -68,3 +68,7 @@ python pruning.py \
    --emb_hidden_dim ${MATRIX_RANK_OF_EMB_FACTORIZATION}$
 ```
 The architecture of the ROSITA model is `keep_heads=2`, `keep_layers=6`, `ffn_hidden_dim=768` and `emb_hidden_dim=128`.
+
+## Knowledge Distillation with Single-dimension HSK Compression
+
+### Depth Compression
