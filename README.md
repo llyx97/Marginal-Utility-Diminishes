@@ -79,15 +79,15 @@ python main.py \
   --task_name $TASK \
   --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL}$ \
   --max_seq_length 128 \
-  --train_batch_size 32 \
-  --num_train_epochs 30 \
+  --train_batch_size 64 \
+  --num_train_epochs 5 \
   --learning_rate 2e-5 \
   --eval_step 50 \
   --do_lower_case \
   --pred_distill \
   --is_rosita
 ```
-The above example is for ROSITA. To conduct distillation for TinyBERT, fill the argument `--student_model` with the path of the downloaded pre-trained TinyBERT, and delete the argument `--is_rosita`. The training hyper-parameters can be found in the appendix of the paper. Notably, when the student is trianed only with prediction (w/o HSK distillation), we set the number of training epoch to the same as HSK distillation.
+The above example is for ROSITA. To conduct distillation for TinyBERT, fill the argument `--student_model` with the path of the downloaded pre-trained TinyBERT, and delete the argument `--is_rosita`. The training hyper-parameters for each task can be found in the appendix of the paper. Notably, when the student is trianed only with prediction (w/o HSK distillation), we set the number of training epoch to the same as HSK distillation.
 
 ## Knowledge Distillation with Single-dimension HSK Compression
 
