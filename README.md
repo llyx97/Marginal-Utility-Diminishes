@@ -133,3 +133,23 @@ python main.py \
   --is_rosita 
 ```
 `--keep_tokens` can be set as any integer from 1 to maximum sequence length. `--token_scheme` can be choosed from "left_first", "attention" and "attention_no_sep". To enable selecting the attention scores using "t_top12", set `--att_ttop12` as True.
+
+### Width Compression
+A running example of HSK distillation with width compression is:
+```
+python3 $root_dir/hskc/main.py \
+  --teacher_model models/bert_ft/$TASK \
+  --student_model models/prun_bert/$TASK \
+  --data_dir data/$TASK \
+  --task_name $TASK \
+  --output_dir ${THE_NUM_OF_TOKENS_TO_KEEP_FOR_HSK}$ \
+  --train_batch_size 32 \
+  --learning_rate 5e-5 \
+  --eval_step 200 \
+  --keep_hidden ${THE_PERSENTAGE_OF_NEURONS_TO_KEEP_FOR_HSK}$ \
+  --layer_scheme t_top10 \
+  --hidden_scheme ${WIDTH_COMPRESSION_SCHEME}$ \
+  --do_lower_case \
+  --repr_distill \
+  --is_rosita 
+```
