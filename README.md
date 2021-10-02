@@ -132,7 +132,7 @@ python main.py \
   --repr_distill \
   --is_rosita 
 ```
-`--keep_tokens` can be set as any integer from 1 to maximum sequence length. `--token_scheme` can be choosed from "left_first", "attention" and "attention_no_sep". To enable selecting the attention scores using "t_top12", set `--att_ttop12` as True.
+`--keep_tokens` can be set as any integer from 1 to maximum sequence length. `--token_scheme` can be choosen from "left_first", "attention" and "attention_no_sep". To enable selecting the attention scores using "t_top12", set `--att_ttop12` as True.
 
 ### Width Compression
 A running example of HSK distillation with width compression is:
@@ -153,3 +153,6 @@ python3 $root_dir/hskc/main.py \
   --repr_distill \
   --is_rosita 
 ```
+`--keep_hidden` can be set as any real number from 0\~1. `--hidden_scheme` can be choosen "rand_mask", "uniform_mask" and "importance_mask_dynamic".
+
+## Knowledge Distillation with Three-dimension HSK Compression
