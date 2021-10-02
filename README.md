@@ -1,6 +1,6 @@
 # Marginal Utility Diminishes in BERT KD
 
-This repository contains implementation of the [paper](https://arxiv.org/abs/2106.05691) "Marginal Utility Diminishes: Exploring the Minimum Knowledge for BERT Knowledge Distillation" in ACL 2021.
+This repository contains the implementation of the [paper](https://arxiv.org/abs/2106.05691) "Marginal Utility Diminishes: Exploring the Minimum Knowledge for BERT Knowledge Distillation" in ACL 2021.
 
 The code for fine-tuning models (w/o knowledge distillation (KD)) is modified from [huggingface/transformers](https://github.com/huggingface/transformers).
 
@@ -77,7 +77,7 @@ python main.py \
   --student_model models/prun_bert/$TASK \
   --data_dir data/$TASK \
   --task_name $TASK \
-  --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL}$ \
+  --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_PRED_DISTILL}$ \
   --max_seq_length 128 \
   --train_batch_size 64 \
   --num_train_epochs 5 \
@@ -87,19 +87,19 @@ python main.py \
   --pred_distill \
   --is_rosita
 ```
-The above example is for ROSITA. To conduct distillation for TinyBERT, fill the argument `--student_model` with the path of the pre-trained TinyBERT, and delete the argument `--is_rosita`. The training hyper-parameters for each task can be found in the appendix of the paper. Notably, when the student is trianed only with prediction (w/o HSK distillation), we set `--num_train_epochs` to the same as HSK distillation.
+The above example is for ROSITA. To conduct distillation for TinyBERT, fill the argument `--student_model` with the path of the pre-trained TinyBERT, and delete the argument `--is_rosita`. The training hyper-parameters for each task can be found in the appendix of the paper. Notably, when the student is trained only with prediction (w/o HSK distillation), we set `--num_train_epochs` to the same as HSK distillation.
 
 ## Knowledge Distillation with Single-dimension HSK Compression
 
 ### Depth Compression
-To conduct hidden state konwledge (HSK) distillation with HSK compressed from the depth dimension, run:
+To conduct hidden state knowledge (HSK) distillation with HSK compressed from the depth dimension, run:
 ```
 python main.py \
   --teacher_model models/bert_ft/$TASK \
   --student_model models/prun_bert/$TASK \
   --data_dir data/$TASK \
   --task_name $TASK \
-  --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_HSK_DISTILLATION}$ \
+  --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_HSK_DISTILL}$ \
   --max_seq_length 128 \
   --train_batch_size 32 \
   --learning_rate 5e-5 \
@@ -120,13 +120,13 @@ python main.py \
   --student_model models/prun_bert/$TASK \
   --data_dir data/$TASK \
   --task_name $TASK \
-  --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_HSK_DISTILLATION}$ \
+  --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_HSK_DISTILL}$ \
   --train_batch_size 32 \
   --learning_rate 5e-5 \
   --eval_step 200 \
   --keep_tokens ${THE_NUM_OF_TOKENS_TO_KEEP_FOR_HSK}$  \
   --layer_scheme t_top10 \
-  --token_scheme ${DEPTH_COMPRESSION_SCHEME}$ \
+  --token_scheme ${LENGTH_COMPRESSION_SCHEME}$ \
   --do_lower_case \
   --repr_distill \
   --is_rosita 
