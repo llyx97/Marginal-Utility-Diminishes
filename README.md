@@ -127,7 +127,9 @@ python main.py \
   --keep_tokens ${THE_NUM_OF_TOKENS_TO_KEEP_FOR_HSK}$  \
   --layer_scheme t_top10 \
   --token_scheme ${LENGTH_COMPRESSION_SCHEME}$ \
+  --att_ttop12 False \
   --do_lower_case \
   --repr_distill \
   --is_rosita 
 ```
+`--keep_token` can be set as any integer from 1 to maximum sequence length. `--token_scheme` can be choosed from "left_first", "attention" and "attention_no_sep". To enable selecting the attention using "t_top12", set `--att_ttop12` as True.
