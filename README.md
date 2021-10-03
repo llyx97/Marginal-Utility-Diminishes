@@ -16,7 +16,7 @@ tqdm <br />
 boto3 <br />
 
 ## Fine-tune BERT Teacher
-To fine-tune the pre-trained BERT model on a downstream task ${TASK_NAME}$, run:
+To fine-tune the pre-trained BERT model on a downstream task $TASK, run:
 ```
 CUDA_VISIBLE_DEVICES=0 python bert_ft.py \
   --model_type bert \
