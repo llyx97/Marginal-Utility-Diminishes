@@ -137,12 +137,12 @@ python main.py \
 ### Width Compression
 A running example of HSK distillation with width compression is:
 ```
-python3 $root_dir/hskc/main.py \
+python3 \main.py \
   --teacher_model models/bert_ft/$TASK \
   --student_model models/prun_bert/$TASK \
   --data_dir data/$TASK \
   --task_name $TASK \
-  --output_dir ${THE_NUM_OF_TOKENS_TO_KEEP_FOR_HSK}$ \
+  --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_HSK_DISTILL}$ \
   --train_batch_size 32 \
   --learning_rate 5e-5 \
   --eval_step 200 \
