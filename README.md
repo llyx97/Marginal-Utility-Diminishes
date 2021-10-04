@@ -194,4 +194,4 @@ python3 main.py \
   --layer_scheme t_top8 \
   --is_rosita
 ```
-`--config_3d` specifies the configuration for HSK compression, i.e., the amount of HSK allocated to the depth, length and width dimensions. We adopt the "attention_no_sep" scheme for length compression, and the "importance_mask_dynamic" scheme for width compression, as they perform well in single dimension compression.
+`--config_3d` specifies the configuration for 3d HSK compression, i.e., the amount of HSK allocated to the depth, length and width dimensions. Please refer to the papar for the compression schemes for each dimension.
