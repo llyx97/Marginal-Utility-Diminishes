@@ -159,37 +159,39 @@ python3 main.py \
 After HSK distillation, the student model is further trained with prediction distillation:
 ```
 python3 main.py \
-                --teacher_model models/bert_ft/$TASK \
-                --student_model ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_HSK_DISTILL}$ \
-                --data_dir data/$TASK \
-                --task_name $TASK \
-                --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_PRED_DISTILL}$ \
-                --train_batch_size 32 \
-                --num_train_epochs 5 \
-                --warmup_proportion 0. \
-                --learning_rate 2e-5 \
-                --eval_step 50 \
-                --do_lower_case \
-                --pred_distill \
-                --is_rosita
+  --teacher_model models/bert_ft/$TASK \
+  --student_model ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_HSK_DISTILL}$ \
+  --data_dir data/$TASK \
+  --task_name $TASK \
+  --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_PRED_DISTILL}$ \
+  --train_batch_size 32 \
+  --num_train_epochs 5 \
+  --warmup_proportion 0. \
+  --learning_rate 2e-5 \
+  --eval_step 50 \
+  --do_lower_case \
+  --pred_distill \
+  --is_rosita
 ```
+
 ## Knowledge Distillation with Three-dimension HSK Compression
 To conduct HSK distillation with three dimensions being compressed jointly, run:
 ```
 python3 main.py \
-                --teacher_model models/bert_ft/$TASK \
-                --student_model models/prun_bert/$TASK \
-                --data_dir data/$TASK \
-                --task_name $TASK \
-                --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_HSK_DISTILL}$ \
-                --config_3d 1l_10t_0.1h \
-                --train_batch_size 32 \
-                --learning_rate 5e-5 \
-                --eval_step 200 \
-                --do_lower_case \
-                --repr_distill \
-                --hidden_scheme importance_mask_dynamic \
-                --token_scheme attention_no_sep \
-                --layer_scheme t_top8 \
-                --is_rosita
+  --teacher_model models/bert_ft/$TASK \
+  --student_model models/prun_bert/$TASK \
+  --data_dir data/$TASK \
+  --task_name $TASK \
+  --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_HSK_DISTILL}$ \
+  --config_3d 1l_10t_0.1h \
+  --train_batch_size 32 \
+  --learning_rate 5e-5 \
+  --eval_step 200 \
+  --do_lower_case \
+  --repr_distill \
+  --hidden_scheme importance_mask_dynamic \
+  --token_scheme attention_no_sep \
+  --layer_scheme t_top8 \
+  --is_rosita
 ```
+`--config_3d` specifies the configuration for HSK compression, i.e., the amount of HSK allocated to the depth, length and width dimensions. We adopt the "attention_no_sep" scheme for length compression, and the "importance_mask_dynamic" scheme for width compression, as they perform well in single dimension compression.
