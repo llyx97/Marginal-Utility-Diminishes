@@ -174,3 +174,22 @@ python3 main.py \
                 --is_rosita
 ```
 ## Knowledge Distillation with Three-dimension HSK Compression
+To conduct HSK distillation with three dimensions being compressed jointly, run:
+```
+python3 main.py \
+                --teacher_model models/bert_ft/$TASK \
+                --student_model models/prun_bert/$TASK \
+                --data_dir data/$TASK \
+                --task_name $TASK \
+                --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_HSK_DISTILL}$ \
+                --config_3d 1l_10t_0.1h \
+                --train_batch_size 32 \
+                --learning_rate 5e-5 \
+                --eval_step 200 \
+                --do_lower_case \
+                --repr_distill \
+                --hidden_scheme importance_mask_dynamic \
+                --token_scheme attention_no_sep \
+                --layer_scheme t_top8 \
+                --is_rosita
+```
