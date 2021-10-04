@@ -137,7 +137,7 @@ python main.py \
 ### Width Compression
 A running example of HSK distillation with width compression is:
 ```
-python3 \main.py \
+python3 main.py \
   --teacher_model models/bert_ft/$TASK \
   --student_model models/prun_bert/$TASK \
   --data_dir data/$TASK \
@@ -155,4 +155,22 @@ python3 \main.py \
 ```
 `--keep_hidden` can be set as any real number from 0\~1. `--hidden_scheme` can be choosen "rand_mask", "uniform_mask" and "importance_mask_dynamic".
 
+### Prediction Distillation
+After HSK distillation, the student model is further trained with prediction distillation:
+```
+python3 main.py \
+                --teacher_model models/bert_ft/$TASK \
+                --student_model ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_HSK_DISTILL}$ \
+                --data_dir data/$TASK \
+                --task_name $TASK \
+                --output_dir ${OUTPUT_DIR_FOR_STUDENT_MODEL_AFTER_PRED_DISTILL}$ \
+                --train_batch_size 32 \
+                --num_train_epochs 5 \
+                --warmup_proportion 0. \
+                --learning_rate 2e-5 \
+                --eval_step 50 \
+                --do_lower_case \
+                --pred_distill \
+                --is_rosita
+```
 ## Knowledge Distillation with Three-dimension HSK Compression
