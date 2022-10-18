@@ -195,3 +195,15 @@ python3 main.py \
   --is_rosita
 ```
 `--config_3d` specifies the configuration for 3d HSK compression, i.e., the amount of HSK allocated to the depth, length and width dimensions. Please refer to the papar for the compression schemes for each dimension. Like single-dimension compression, HSK distillation is followed by [prediction distillation](https://github.com/llyx97/Marginal-Utility-Diminishes#prediction-distillation) in 3d compression.
+
+## Citation
+
+If you use this repository in a published research, please cite our paper:
+```bibtex
+@inproceedings{Liu2021MUD,
+author = {Yuanxin Liu, Fandong Meng, Zheng Lin, Weiping Wang, Jie Zhou},
+title = {Marginal Utility Diminishes: Exploring the Minimum Knowledge for BERT Knowledge Distillation},
+booktitle = {ACL 2021},
+year = {2021}
+}
+```
